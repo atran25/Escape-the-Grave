@@ -770,7 +770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   previousRoom: {fileID: 878923029}
   nextRoom: {fileID: 359492784}
-  cam: {fileID: 0}
+  cam: {fileID: 519420033}
 --- !u!61 &342078064
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -994,7 +994,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &468008179
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e881f3994197085499fa6bb02865fff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 7
 --- !u!114 &468008181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,6 +1157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0.5
+  player: {fileID: 468008177}
+  aheadDistance: 10
+  cameraSpeed: 2
 --- !u!1 &568779965
 GameObject:
   m_ObjectHideFlags: 0
