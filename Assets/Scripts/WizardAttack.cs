@@ -20,7 +20,7 @@ public class WizardAttack : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-       if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown && wizardMovement.canAttack())
+       if (Input.GetMouseButton(0) && cooldownTimer > attackCooldown)
         {
             Attack();
         }

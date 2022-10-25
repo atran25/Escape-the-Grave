@@ -6,14 +6,18 @@ public class WizardMovement : MonoBehaviour
 {
 
     [SerializeField] private float speed;
+    [SerializeField] private float jumpMult;
+    [SerializeField]private LayerMask groundLayer;
     private Rigidbody2D body;
     private Animator animator;
     private float direction = 0;
+    private BoxCollider2D boxCollider;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -31,9 +35,9 @@ public class WizardMovement : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && isGrounded())
         {
-            body.velocity = new Vector2(body.velocity.x, speed);
+            body.velocity = new Vector2(body.velocity.x, speed * jumpMult);
         }
 
         animator.SetBool("isRunning", direction != 0);
@@ -43,5 +47,11 @@ public class WizardMovement : MonoBehaviour
     public bool canAttack()
     {
         return direction == 0;
+    }
+    
+    private bool isGrounded()
+    {
+        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
+        return raycastHit.collider != null;
     }
 }
