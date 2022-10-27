@@ -12,6 +12,10 @@ public class Health : MonoBehaviour
     [SerializeField] private float iFrameDuration;
     [SerializeField] private int numberOfFlashes;
     private SpriteRenderer spriteRenderer;
+    private bool dead;
+
+    [Header("Components")]
+    [SerializeField] private Behaviour[] components;
 
     private void Awake()
     {
@@ -28,7 +32,18 @@ public class Health : MonoBehaviour
         }
         else
         {
+            if (!dead)
+            {
 
+                foreach (Behaviour comp in components)
+                {
+                    comp.enabled = false;
+                }
+
+                dead = true;
+                gameObject.SetActive(false);
+
+            }
         }
     }
 
@@ -52,6 +67,11 @@ public class Health : MonoBehaviour
         }
         Physics2D.IgnoreLayerCollision(10, 11, false);
 
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }
 

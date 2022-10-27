@@ -24,7 +24,13 @@ public class WizardMovement : MonoBehaviour
     void Update()
     {
         direction = Input.GetAxis("Horizontal");
-        body.velocity = new Vector2(direction * speed, body.velocity.y);
+        if (isGrounded())
+        {
+            body.velocity = new Vector2(direction * speed, body.velocity.y);
+        } else
+        {
+            body.velocity = new Vector2(direction * (float) (speed / 1.5), body.velocity.y);
+        }
 
         if (direction > 0.01f)
         {
@@ -35,7 +41,7 @@ public class WizardMovement : MonoBehaviour
             transform.localScale = new Vector3(-1, 1, 1);
         }
 
-        if (Input.GetKey(KeyCode.Space) && isGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             body.velocity = new Vector2(body.velocity.x, speed * jumpMult);
         }

@@ -29,17 +29,22 @@ public class WizardProjectile : MonoBehaviour
         transform.Translate(movementSpeed, 0, 0);
 
         lifeTime += Time.deltaTime;
-        if (lifeTime > 4)
+        if (lifeTime > 6)
         {
             gameObject.SetActive(false);
         }
     }
 
-    private void onTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         hit = true;
         boxCollider.enabled = false;
         animator.SetTrigger("canExplode");
+
+        if (collision.tag == "Enemy")
+        {
+            collision.GetComponent<Health>().TakeDamage(1);
+        }
     }
 
     public void setDirection(float _direction)
