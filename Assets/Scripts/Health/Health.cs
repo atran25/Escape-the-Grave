@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     [Header ("Health")]
     [SerializeField] private float startingHealth;
     public float currentHealth { get; private set; }
+    private Animator anim;
 
     [Header("iFrames")]
     [SerializeField] private float iFrameDuration;
@@ -17,10 +18,15 @@ public class Health : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Behaviour[] components;
 
+    private Transform currentCheckpoint;
+    private UIManager uiManager;
+
     private void Awake()
     {
         currentHealth = startingHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     public void TakeDamage(float _damage)
@@ -32,6 +38,7 @@ public class Health : MonoBehaviour
         }
         else
         {
+            
             if (!dead)
             {
 
@@ -43,6 +50,16 @@ public class Health : MonoBehaviour
                 dead = true;
                 gameObject.SetActive(false);
 
+                if (gameObject.tag == "Player")
+                {
+                    Respawn();
+                    transform.position = currentCheckpoint.position;
+                }
+                else if (gameObject.tag == "Enemy")
+                {
+
+                    Invoke("Respawn", 5);
+                }
             }
         }
     }
@@ -72,6 +89,38 @@ public class Health : MonoBehaviour
     private void Deactivate()
     {
         gameObject.SetActive(false);
+    }
+
+    public void AddHealth(float _value)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+    }
+
+    public void Respawn()
+    {
+        AddHealth(startingHealth);
+        dead = false;
+        gameObject.SetActive(true);
+        StartCoroutine(Invulnerability());
+        foreach (Behaviour comp in components)
+        {
+            comp.enabled = true;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Checkpoint")
+        {
+            currentCheckpoint = collision.transform;
+            collision.GetComponent<Collider2D>().enabled = false;
+
+        }
+        else if (collision.gameObject.CompareTag("end") &&  gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Victory");
+            uiManager.GameOver();
+        }
     }
 }
 

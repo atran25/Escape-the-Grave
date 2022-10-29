@@ -29,7 +29,7 @@ public class WizardMovement : MonoBehaviour
             body.velocity = new Vector2(direction * speed, body.velocity.y);
         } else
         {
-            body.velocity = new Vector2(direction * (float) (speed / 1.5), body.velocity.y);
+            body.velocity = new Vector2(direction * speed, body.velocity.y);
         }
 
         if (direction > 0.01f)
