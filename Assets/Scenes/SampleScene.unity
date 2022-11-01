@@ -3966,8 +3966,8 @@ MonoBehaviour:
 
     Space to jump
 
-    Left
-    Click to shoot'
+    K to 
+    shoot'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ecf7021b12d08bf488ded49b811cfb8b, type: 2}
   m_sharedMaterial: {fileID: 5363225521363770450, guid: ecf7021b12d08bf488ded49b811cfb8b, type: 2}
