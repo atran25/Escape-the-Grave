@@ -20,7 +20,7 @@ public class WizardAttack : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-       if (Input.GetKeyDown(KeyCode.K) && cooldownTimer > attackCooldown)
+       if ((Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift)) && cooldownTimer > attackCooldown)
         {
             Attack();
         }

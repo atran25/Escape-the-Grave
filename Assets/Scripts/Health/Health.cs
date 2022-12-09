@@ -18,6 +18,9 @@ public class Health : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Behaviour[] components;
 
+
+    [SerializeField] private AudioSource hitSound;
+
     private Transform currentCheckpoint;
     private UIManager uiManager;
 
@@ -31,6 +34,10 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        if (gameObject.tag == "Player")
+        {
+            hitSound.Play();
+        }
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
         if (currentHealth > 0)
         {

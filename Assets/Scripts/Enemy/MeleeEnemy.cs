@@ -21,6 +21,7 @@ public class MeleeEnemy : MonoBehaviour
     private Animator anim;
     private EnemyPatrol enemyPatrol;
 
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -75,4 +76,7 @@ public class MeleeEnemy : MonoBehaviour
             playerHealth.TakeDamage(damage);
         }
     }
+
+
+
 }

@@ -12,6 +12,8 @@ public class WizardProjectile : MonoBehaviour
     private BoxCollider2D boxCollider;
     private Animator animator;
 
+    [SerializeField] private AudioSource explosion;
+
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
@@ -67,5 +69,10 @@ public class WizardProjectile : MonoBehaviour
     private void Deactivate()
     {
         gameObject.SetActive(false);
+    }
+
+    private void playExplosion()
+    {
+        explosion.Play(0);
     }
 }
